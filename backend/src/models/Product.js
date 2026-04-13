@@ -7,6 +7,8 @@ const productSchema = new mongoose.Schema(
     description: { type: String, default: '' },
     farmerId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true, index: true },
     category: { type: String, trim: true, default: 'crop' },
+    price: { type: Number, default: null },
+    priceUnit: { type: String, default: 'per kg' },
   },
   { timestamps: true }
 );

@@ -14,12 +14,14 @@ export async function listProducts(req, res, next) {
 
 export async function createProduct(req, res, next) {
   try {
-    const { sku, name, description, category } = req.validatedBody;
+    const { sku, name, description, category, price, priceUnit } = req.validatedBody;
     const product = await Product.create({
       sku,
       name,
       description: description || '',
       category: category || 'crop',
+      price: price ?? null,
+      priceUnit: priceUnit || 'per kg',
       farmerId: req.user.id,
     });
     res.status(201).json(product);

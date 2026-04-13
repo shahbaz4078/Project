@@ -36,6 +36,8 @@ export const productCreateSchema = z.object({
   name: z.string().min(1),
   description: z.string().optional(),
   category: z.string().optional(),
+  price: z.number().nonnegative().nullable().optional(),
+  priceUnit: z.string().optional(),
 });
 
 export const productUpdateSchema = productCreateSchema.partial();

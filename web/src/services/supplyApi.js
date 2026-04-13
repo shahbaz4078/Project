@@ -92,6 +92,8 @@ export const supplyApi = {
       name: productData.name,
       description: productData.description || '',
       category: productData.category || 'crop',
+      price: productData.price ? Number(productData.price) : null,
+      priceUnit: productData.priceUnit || 'per kg',
     });
 
     const batchCode = `B-${Date.now()}`;

@@ -15,7 +15,9 @@ const Farmer = () => {
     category: '',
     harvestDate: '',
     location: '',
-    farmingMethod: 'organic'
+    farmingMethod: 'organic',
+    price: '',
+    priceUnit: 'per kg'
   });
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(null);
@@ -62,7 +64,7 @@ const Farmer = () => {
       setSuccess(result);
       await generateQRCode(result.productId);
       setFormData({
-        name: '', description: '', category: '', harvestDate: '', location: '', farmingMethod: 'organic'
+        name: '', description: '', category: '', harvestDate: '', location: '', farmingMethod: 'organic', price: '', priceUnit: 'per kg'
       });
     } catch (error) {
       console.error('Registration error:', error);
@@ -176,6 +178,36 @@ const Farmer = () => {
                       {categories.map(category => (
                         <option key={category} value={category}>{category}</option>
                       ))}
+                    </select>
+                  </div>
+
+                  <div className="col-md-4">
+                    <label className="form-label fw-semibold">Price</label>
+                    <input
+                      type="number"
+                      name="price"
+                      value={formData.price}
+                      onChange={handleInputChange}
+                      className="form-control"
+                      placeholder="e.g., 80"
+                      min="0"
+                      step="0.01"
+                    />
+                  </div>
+
+                  <div className="col-md-2">
+                    <label className="form-label fw-semibold">Unit</label>
+                    <select
+                      name="priceUnit"
+                      value={formData.priceUnit}
+                      onChange={handleInputChange}
+                      className="form-select"
+                    >
+                      <option value="per kg">per kg</option>
+                      <option value="per piece">per piece</option>
+                      <option value="per dozen">per dozen</option>
+                      <option value="per quintal">per quintal</option>
+                      <option value="per litre">per litre</option>
                     </select>
                   </div>
                   
