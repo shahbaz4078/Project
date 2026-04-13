@@ -15,7 +15,7 @@ export function toDisplayProduct(p) {
     productId: id,
     farmer: farmerName,
     status: p.status || 'Registered',
-    predictedPrice: p.predictedPrice ?? p.quantity ?? 0,
+    predictedPrice: p.predictedPrice ?? p.price ?? p.quantity ?? 0,
     timestamp: p.createdAt || p.timestamp,
     transactionHash: p.transactionHash || p.txHash,
   };
