@@ -313,6 +313,9 @@ const Retailer = () => {
                         <small className="text-muted text-truncate d-block">
                           Origin: {product.location || 'Pending'}
                         </small>
+                        <small className="text-success fw-semibold d-block mt-1">
+                          🚚 ETA: {new Date(Date.now() + 3 * 24 * 60 * 60 * 1000).toLocaleDateString('en-IN', {day:'numeric', month:'short'})}
+                        </small>
                       </p>
                       <div className="d-flex justify-content-between">
                         <span className="badge bg-info">In Stock</span>

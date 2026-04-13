@@ -170,6 +170,9 @@ const Consumer = () => {
                           <small className="text-muted d-block text-truncate">
                             <strong>Farmer:</strong> {product.farmer}
                           </small>
+                          <small className="text-success d-block fw-semibold mt-1">
+                            🚚 Est. Delivery: {new Date(Date.now() + 3 * 24 * 60 * 60 * 1000).toLocaleDateString('en-IN', {day:'numeric', month:'short', year:'numeric'})}
+                          </small>
                         </div>
                         
                         <div className="d-grid gap-2">

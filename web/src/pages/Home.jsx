@@ -114,11 +114,12 @@ const Home = () => {
     },
   ];
 
+  // April 2026 — Based on Indian Mandi Rates & AGMARKNET data
   const marketTrends = [
-    { category: 'Vegetables', trend: 'up', price: '₹68', change: '+12%' },
-    { category: 'Fruits', trend: 'up', price: '₹110', change: '+8%' },
-    { category: 'Grains', trend: 'down', price: '₹58', change: '-3%' },
-    { category: 'Dairy', trend: 'up', price: '₹85', change: '+15%' }
+    { category: 'Vegetables', trend: 'up',   price: '₹45/kg',  change: '+18%', detail: 'Tomato, Onion surging' },
+    { category: 'Fruits',     trend: 'down',  price: '₹115/kg', change: '-8%',  detail: 'Apple, Grapes peak arrival' },
+    { category: 'Grains',     trend: 'stable',price: '₹42/kg',  change: '+2%',  detail: 'Rice stable, Maize rising' },
+    { category: 'Dairy',      trend: 'up',    price: '₹66/L',   change: '+4%',  detail: 'Amul milk rate hike' },
   ];
 
   return (
@@ -263,9 +264,10 @@ const Home = () => {
                       <div className="text-center p-3 bg-light rounded hover-item">
                         <h6 className="mb-1">{trend.category}</h6>
                         <div className="fw-bold text-success mb-1">{trend.price}</div>
-                        <span className={`badge ${trend.trend === 'up' ? 'bg-success' : 'bg-danger'}`}>
+                        <span className={`badge ${trend.trend === 'up' ? 'bg-success' : trend.trend === 'down' ? 'bg-danger' : 'bg-secondary'}`}>
                           {trend.change}
                         </span>
+                        {trend.detail && <div className="mt-1" style={{fontSize:'0.7rem',color:'#6b7280'}}>{trend.detail}</div>}
                       </div>
                     </div>
                   ))}
