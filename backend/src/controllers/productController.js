@@ -14,7 +14,7 @@ export async function listProducts(req, res, next) {
 
 export async function createProduct(req, res, next) {
   try {
-    const { sku, name, description, category, price, priceUnit } = req.validatedBody;
+    const { sku, name, description, category, price, priceUnit, location, farmingMethod, harvestDate } = req.validatedBody;
     const product = await Product.create({
       sku,
       name,
@@ -22,6 +22,9 @@ export async function createProduct(req, res, next) {
       category: category || 'crop',
       price: price ?? null,
       priceUnit: priceUnit || 'per kg',
+      location: location || '',
+      farmingMethod: farmingMethod || '',
+      harvestDate: harvestDate ? new Date(harvestDate) : undefined,
       farmerId: req.user.id,
     });
     res.status(201).json(product);

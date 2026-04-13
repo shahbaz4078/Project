@@ -153,34 +153,46 @@ const Consumer = () => {
                             </small>
                           </div>
                           <div className="d-flex justify-content-between align-items-center">
-                            <span className="fw-bold text-success fs-5">₹{product.predictedPrice}</span>
-                            <small className="text-muted">ID: {product.productId}</small>
+                            <span className="fw-bold text-success fs-5">
+                              ₹{product.predictedPrice} <span className="fs-6 text-muted fw-normal">/{product.priceUnit?.replace('per ', '') || 'kg'}</span>
+                            </span>
+                            <small className="text-muted">ID: {product.productId?.length > 8 ? product.productId.slice(0,8) + '...' : product.productId}</small>
                           </div>
                         </div>
                         
                         <div className="mb-3">
-                          <small className="text-muted d-block">
-                            <strong>Origin:</strong> {product.location}
+                          <small className="text-muted d-block text-truncate">
+                            <strong>Origin:</strong> {product.location || 'Pending Details'}
                           </small>
-                          <small className="text-muted d-block">
-                            <strong>Method:</strong> {product.farmingMethod}
+                          <small className="text-muted d-block text-truncate">
+                            <strong>Method:</strong> {product.farmingMethod || 'Standard'}
                           </small>
-                          <small className="text-muted d-block">
+                          <small className="text-muted d-block text-truncate">
                             <strong>Farmer:</strong> {product.farmer}
                           </small>
                         </div>
                         
                         <div className="d-grid gap-2">
-                          <Link 
-                            to={`/product/${product.productId}`}
-                            className="btn btn-primary"
-                          >
-                            <Eye size={16} className="me-2" />
-                            View Details
-                          </Link>
-                          <div className="btn btn-outline-success btn-sm">
-                            <ShieldCheck size={16} className="me-2" />
-                            Blockchain Verified
+                          <div className="d-flex gap-2">
+                            <Link 
+                              to={`/product/${product.productId}`}
+                              className="btn btn-primary flex-grow-1"
+                            >
+                              <Eye size={16} className="me-2" />
+                              View
+                            </Link>
+                            <button 
+                              className="btn btn-success flex-grow-1"
+                              onClick={() => alert(`Purchased ${product.name}!`)}
+                            >
+                              Buy Now
+                            </button>
+                          </div>
+                          <div className="text-center mt-1">
+                            <small className="text-success fw-medium">
+                              <ShieldCheck size={14} className="me-1" />
+                              Blockchain Verified
+                            </small>
                           </div>
                         </div>
                       </div>

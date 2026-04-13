@@ -9,6 +9,9 @@ const productSchema = new mongoose.Schema(
     category: { type: String, trim: true, default: 'crop' },
     price: { type: Number, default: null },
     priceUnit: { type: String, default: 'per kg' },
+    location: { type: String, trim: true, default: '' },
+    farmingMethod: { type: String, trim: true, default: '' },
+    harvestDate: { type: Date },
   },
   { timestamps: true }
 );

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import { useAuth, roleRoute } from '../context/AuthContext.jsx';
-import { LogIn, UserPlus, Leaf, Truck, Store, Users } from 'lucide-react';
+import { LogIn, UserPlus, Leaf, Truck, Store, Users, Eye, EyeOff } from 'lucide-react';
 
 /** Visual role cards shown in the Register form */
 const ROLES = [
@@ -55,6 +55,7 @@ const Login = () => {
   const [selectedRole, setSelectedRole] = useState('farmer');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
 
   const submit = async (e) => {
     e.preventDefault();
@@ -152,14 +153,24 @@ const Login = () => {
 
               <div className="mb-3">
                 <label className="form-label fw-semibold">Password</label>
-                <input
-                  type="password"
-                  className="form-control"
-                  required
-                  minLength={8}
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                />
+                <div className="input-group">
+                  <input
+                    type={showPassword ? 'text' : 'password'}
+                    className="form-control"
+                    required
+                    minLength={8}
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                  />
+                  <button 
+                    type="button" 
+                    className="btn btn-outline-secondary d-flex align-items-center"
+                    onClick={() => setShowPassword(!showPassword)}
+                    tabIndex="-1"
+                  >
+                    {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+                  </button>
+                </div>
               </div>
 
               {/* Role picker — register only */}

@@ -38,6 +38,9 @@ export const productCreateSchema = z.object({
   category: z.string().optional(),
   price: z.number().nonnegative().nullable().optional(),
   priceUnit: z.string().optional(),
+  location: z.string().optional(),
+  farmingMethod: z.string().optional(),
+  harvestDate: z.string().optional(),
 });
 
 export const productUpdateSchema = productCreateSchema.partial();

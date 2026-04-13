@@ -15,7 +15,11 @@ export function toDisplayProduct(p) {
     productId: id,
     farmer: farmerName,
     status: p.status || 'Registered',
-    predictedPrice: p.predictedPrice ?? p.price ?? p.quantity ?? 0,
+    predictedPrice: p.price ?? p.predictedPrice ?? p.quantity ?? 0,
+    priceUnit: p.priceUnit || 'per kg',
+    location: p.location || '',
+    farmingMethod: p.farmingMethod || '',
+    harvestDate: p.harvestDate || null,
     timestamp: p.createdAt || p.timestamp,
     transactionHash: p.transactionHash || p.txHash,
   };
@@ -94,6 +98,9 @@ export const supplyApi = {
       category: productData.category || 'crop',
       price: productData.price ? Number(productData.price) : null,
       priceUnit: productData.priceUnit || 'per kg',
+      location: productData.location || '',
+      farmingMethod: productData.farmingMethod || '',
+      harvestDate: productData.harvestDate || undefined,
     });
 
     const batchCode = `B-${Date.now()}`;
@@ -113,10 +120,12 @@ export const supplyApi = {
       qrPayload: batch.qrPayload,
       transactionHash: null,
       aiAnalysis: {
-        predictedPrice: `₹${50 + Math.floor(Math.random() * 50)}`,
-        priceTrend: 'stable',
-        demandLevel: 'moderate',
-        riskLevel: 'minimal',
+        predictedPrice: productData.price 
+          ? (Number(productData.price) * (1 + (Math.random() * 0.1 - 0.05))).toFixed(2)
+          : `₹${50 + Math.floor(Math.random() * 50)}`,
+        priceTrend: Math.random() > 0.5 ? 'increasing' : 'stable',
+        demandLevel: Math.random() > 0.4 ? 'high' : 'moderate',
+        riskLevel: 'low',
       },
     };
   },

@@ -152,7 +152,7 @@ const Retailer = () => {
                       <option value="">Select a product</option>
                       {products.map(product => (
                         <option key={product.productId} value={product.productId}>
-                          {product.name} - ₹{product.predictedPrice} ({product.status})
+                          {product.name} - ₹{product.predictedPrice} /{product.priceUnit?.replace('per ', '') || 'kg'} ({product.location || 'Unknown Origin'})
                         </option>
                       ))}
                     </select>
@@ -303,10 +303,15 @@ const Retailer = () => {
                     <div className="card-body text-center">
                       <Package size={24} className="text-info mb-2" />
                       <h6 className="card-title">{product.name}</h6>
-                      <p className="card-text">
+                      <p className="card-text mb-1">
                         <small className="text-muted">
                           <IndianRupee size={12} className="me-1" />
-                          ₹{product.predictedPrice}
+                          ₹{product.predictedPrice} /{product.priceUnit?.replace('per ', '') || 'kg'}
+                        </small>
+                      </p>
+                      <p className="card-text mb-3">
+                        <small className="text-muted text-truncate d-block">
+                          Origin: {product.location || 'Pending'}
                         </small>
                       </p>
                       <div className="d-flex justify-content-between">

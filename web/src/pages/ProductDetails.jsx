@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { Package, MapPin, Calendar, Leaf, User, Hash, ExternalLink, IndianRupee } from 'lucide-react';
+import { Package, MapPin, Calendar, Leaf, User, Hash, ExternalLink, IndianRupee, ShoppingCart, Truck } from 'lucide-react';
 import { supplyApi } from '../services/supplyApi.js';
 import AIAnalytics from '../components/AIAnalytics';
 import AmazonTimeline from '../components/AmazonTimeline';
@@ -105,9 +105,16 @@ const ProductDetails = () => {
             {product.predictedPrice && (
               <span className="badge bg-success fs-6">
                 <IndianRupee size={14} className="me-1" />
-                ₹{product.predictedPrice}
+                ₹{product.predictedPrice} {product.priceUnit === 'per kg' ? '/ kg' : '/ ' + (product.priceUnit?.replace('per ', '') || 'unit')}
               </span>
             )}
+          </div>
+          
+          <div className="mt-4">
+            <button className="btn btn-primary btn-lg px-5 shadow-sm" onClick={() => alert('Simulated purchase successful!')}>
+              <ShoppingCart size={20} className="me-2" />
+              Buy Now
+            </button>
           </div>
         </div>
 
@@ -197,6 +204,16 @@ const ProductDetails = () => {
                     <code className="ms-4 small">{product.transactionHash.slice(0, 20)}...</code>
                   </div>
                 )}
+
+                <div className="mb-3 p-3 bg-light rounded border">
+                  <div className="d-flex align-items-center mb-2">
+                    <Truck size={16} className="text-primary me-2" />
+                    <strong>Expected Delivery:</strong>
+                  </div>
+                  <p className="text-dark fw-bold ms-4 mb-0">
+                    {new Date(Date.now() + 3 * 24 * 60 * 60 * 1000).toLocaleDateString()} (Estimated)
+                  </p>
+                </div>
               </div>
             </div>
           </div>
