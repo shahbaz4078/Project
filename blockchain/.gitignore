@@ -1,0 +1,16 @@
+# Foundry build artifacts
+out/
+cache/
+
+# Forge coverage report
+lcov.info
+
+# Environment — never commit real keys
+.env
+
+# Broadcast / deployment receipts (optional: keep for record-keeping)
+# broadcast/
+
+# OS artefacts
+.DS_Store
+Thumbs.db
